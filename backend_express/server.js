@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import connectDB from "./config/db.js";
+import authRoutes from "./routes/auth.js";
+import attendanceRoutes from './routes/attendance.js';
 
 dotenv.config();
 const app = express();
@@ -17,6 +19,12 @@ connectDB();
 app.get("/", (req, res) => {
   res.send("Server is running successfully!");
 });
+
+// Authentication Route. This is where the endpoint for auths stuff.
+app.use("/api/auth", authRoutes);
+// Attendance Route. This is where the endpoint for attendances.
+app.use('/api/attendance', attendanceRoutes);
+
 
 // Start server
 
